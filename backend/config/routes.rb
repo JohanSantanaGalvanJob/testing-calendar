@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :locations
+  resources :event_types
+  resources :event_users
   devise_for :users
   resources :events
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
