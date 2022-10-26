@@ -1,0 +1,394 @@
+  [1m[35m (781.7ms)[0m  [1m[35mCREATE DATABASE "calendar_event_development" ENCODING = 'unicode'[0m
+  [1m[35m (14.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1979676041808099075)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateEvents (20221024184102)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE TABLE "events" ("id" bigserial primary key, "title" character varying, "description" character varying, "date" date, "starting_hour" character varying, "finished_hour" character varying, "photo" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221024184102"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-10-24 21:08:58.234005"], ["updated_at", "2022-10-24 21:08:58.234005"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1979676041808099075)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (4.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mEvent Create (0.8ms)[0m  [1m[32mINSERT INTO "events" ("title", "description", "date", "starting_hour", "finished_hour", "photo", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Curso de Salsa"], ["description", "Curso de salsa en la terraza Kopa"], ["date", "2022-10-30"], ["starting_hour", "18:00"], ["finished_hour", "22:00"], ["photo", "rgijreoigjig"], ["created_at", "2022-10-24 21:09:14.980834"], ["updated_at", "2022-10-24 21:09:14.980834"]]
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mEvent Create (0.6ms)[0m  [1m[32mINSERT INTO "events" ("title", "description", "date", "starting_hour", "finished_hour", "photo", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "Curso de Creación de juegos"], ["description", "Curso de programación y diseño de videojuegos en IES El Rincón"], ["date", "2023-04-04"], ["starting_hour", "09:00"], ["finished_hour", "21:00"], ["photo", "rgijreoigjig"], ["created_at", "2022-10-24 21:13:46.323240"], ["updated_at", "2022-10-24 21:13:46.323240"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/events/1" for ::1 at 2022-10-24 22:14:11 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by EventsController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mEvent Load (0.5ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/events_controller.rb:44:in `set_event'
+Completed 200 OK in 102ms (Views: 1.0ms | ActiveRecord: 4.7ms | Allocations: 34397)
+
+
+Started GET "/events" for ::1 at 2022-10-24 22:14:31 +0100
+Processing by EventsController#index as */*
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/events_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.3ms | Allocations: 1125)
+
+
+Started POST "/events?title=sos&description=fhweioghergoierih&date=2019-03-24&starting_hour=18:00&finished_hour=20:00&photo=gerikgnrtoignrt" for ::1 at 2022-10-24 22:15:26 +0100
+Processing by EventsController#create as */*
+  Parameters: {"event.title"=>"sos", "event.description"=>"fhweioghergoierih", "event.date"=>"2019-03-24", "event.starting_hour"=>"18:00", "event.finished_hour"=>"20:00", "event.photo"=>"gerikgnrtoignrt", "title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 500 Internal Server Error in 366147ms (ActiveRecord: 0.0ms | Allocations: 334039)
+
+
+  
+SystemExit (exit):
+  
+(rdbg)/D:/escritorio/clases/2 DAM/Proyecto/CalendarTesting/testing-calendar/app/controllers/events_controller.rb:1:in `exit'
+(rdbg)/D:/escritorio/clases/2 DAM/Proyecto/CalendarTesting/testing-calendar/app/controllers/events_controller.rb:1:in `event_params'
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events?title=sos&description=fhweioghergoierih&date=2019-03-24&starting_hour=18:00&finished_hour=20:00&photo=gerikgnrtoignrt" for ::1 at 2022-10-24 22:22:13 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 43ms (ActiveRecord: 0.0ms | Allocations: 16020)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started DELETE "/events/1" for ::1 at 2022-10-24 22:29:24 +0100
+Processing by EventsController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mEvent Load (0.4ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/events_controller.rb:44:in `set_event'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/events_controller.rb:38:in `destroy'
+  [1m[36mEvent Destroy (0.5ms)[0m  [1m[31mDELETE FROM "events" WHERE "events"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/events_controller.rb:38:in `destroy'
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/events_controller.rb:38:in `destroy'
+Completed 204 No Content in 203ms (ActiveRecord: 16.0ms | Allocations: 26912)
+
+
+Started GET "/events" for ::1 at 2022-10-24 22:29:29 +0100
+Processing by EventsController#index as */*
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/events_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.3ms | Allocations: 1257)
+
+
+Started PUT "/events/2?title=%20Curso%20de%20Creaci%C3%B3n&description=%20Curso%20de%20programaci%C3%B3n%20y%20dise%C3%B1o&date=%202023-04-04&starting_hour=%2009:00&finished_hour=%2021:00&photo=%20rgijreoigjig" for ::1 at 2022-10-24 22:33:04 +0100
+Processing by EventsController#update as */*
+  Parameters: {"title"=>" Curso de Creación", "description"=>" Curso de programación y diseño", "date"=>" 2023-04-04", "starting_hour"=>" 09:00", "finished_hour"=>" 21:00", "photo"=>" rgijreoigjig", "id"=>"2"}
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/events_controller.rb:44:in `set_event'
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.3ms | Allocations: 683)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:29:in `update'
+Started POST "/events?title=sos&description=fhweioghergoierih&date=2019-03-24&starting_hour=18:00&finished_hour=20:00&photo=gerikgnrtoignrt" for ::1 at 2022-10-24 22:35:18 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms | Allocations: 816)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: events):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events?title=sos&description=fhweioghergoierih&date=2019-03-24&starting_hour=18:00&finished_hour=20:00&photo=gerikgnrtoignrt" for ::1 at 2022-10-24 22:40:42 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt", "date"=>"2019-03-24"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 172)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: events):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events?title=sos&description=fhweioghergoierih&date=2019-03-24&starting_hour=18:00&finished_hour=20:00&photo=gerikgnrtoignrt" for ::1 at 2022-10-24 22:40:50 +0100
+Processing by EventsController#create as */*
+  Parameters: {"starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt", "title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 151)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: events):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:42:05 +0100
+Processing by EventsController#create as */*
+  Parameters: {"id"=>"3", "title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (Allocations: 154)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: events):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:42:08 +0100
+Processing by EventsController#create as */*
+  Parameters: {"id"=>"3", "title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (Allocations: 154)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: events):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:42:33 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by EventsController#create as */*
+  Parameters: {"id"=>"3", "title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 42ms (ActiveRecord: 0.0ms | Allocations: 16023)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: events):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:42:50 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 173)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: events):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:43:06 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms | Allocations: 816)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:44:03 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 172)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started GET "/events" for ::1 at 2022-10-24 22:50:40 +0100
+Processing by EventsController#index as */*
+  [1m[36mEvent Load (1.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/events_controller.rb:8:in `index'
+Completed 200 OK in 189ms (Views: 186.8ms | ActiveRecord: 26.8ms | Allocations: 22508)
+
+
+Started GET "/events" for ::1 at 2022-10-24 22:50:45 +0100
+Processing by EventsController#index as */*
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/events_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.3ms | Allocations: 933)
+
+
+Started POST "/events" for ::1 at 2022-10-24 22:50:55 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 181)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:51:00 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 151)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:51:02 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 151)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:51:03 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 151)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:51:04 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 151)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:51:06 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 151)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:51:11 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 151)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:51:13 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 151)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 22:51:15 +0100
+Processing by EventsController#create as */*
+  Parameters: {"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 151)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started GET "/events" for ::1 at 2022-10-24 22:53:18 +0100
+Processing by EventsController#index as */*
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/events_controller.rb:8:in `index'
+Completed 200 OK in 10ms (Views: 5.2ms | ActiveRecord: 3.0ms | Allocations: 4579)
+
+
+Started POST "/events" for ::1 at 2022-10-24 22:58:21 +0100
+Processing by EventsController#create as */*
+  Parameters: {"query"=>"\n    query IntrospectionQuery {\n      __schema {\n        queryType { name }\n        mutationType { name }\n        subscriptionType { name }\n        types {\n          ...FullType\n        }\n        directives {\n          name\n          description\n          locations\n          args {\n            ...InputValue\n          }\n        }\n      }\n    }\n\n    fragment FullType on __Type {\n      kind\n      name\n      description\n      fields(includeDeprecated: true) {\n        name\n        description\n        args {\n          ...InputValue\n        }\n        type {\n          ...TypeRef\n        }\n        isDeprecated\n        deprecationReason\n      }\n      inputFields {\n        ...InputValue\n      }\n      interfaces {\n        ...TypeRef\n      }\n      enumValues(includeDeprecated: true) {\n        name\n        description\n        isDeprecated\n        deprecationReason\n      }\n      possibleTypes {\n        ...TypeRef\n      }\n    }\n\n    fragment InputValue on __InputValue {\n      name\n      description\n      type { ...TypeRef }\n      defaultValue\n    }\n\n    fragment TypeRef on __Type {\n      kind\n      name\n      ofType {\n        kind\n        name\n        ofType {\n          kind\n          name\n          ofType {\n            kind\n            name\n            ofType {\n              kind\n              name\n              ofType {\n                kind\n                name\n                ofType {\n                  kind\n                  name\n                  ofType {\n                    kind\n                    name\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  ", "event"=>{}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 206)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: events
+Did you mean?  event):
+  
+app/controllers/events_controller.rb:49:in `event_params'
+app/controllers/events_controller.rb:18:in `create'
+Started POST "/events" for ::1 at 2022-10-24 23:02:49 +0100
+Processing by EventsController#create as */*
+  Parameters: {"events"=>{"title"=>"sos", "description"=>"fhweioghergoierih", "date"=>"2019-03-24", "starting_hour"=>"18:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}, "event"=>{}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/events_controller.rb:20:in `create'
+  [1m[36mEvent Create (0.7ms)[0m  [1m[32mINSERT INTO "events" ("title", "description", "date", "starting_hour", "finished_hour", "photo", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["title", "sos"], ["description", "fhweioghergoierih"], ["date", "2019-03-24"], ["starting_hour", "18:00"], ["finished_hour", "20:00"], ["photo", "gerikgnrtoignrt"], ["created_at", "2022-10-24 22:02:49.504841"], ["updated_at", "2022-10-24 22:02:49.504841"]]
+  ↳ app/controllers/events_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/events_controller.rb:20:in `create'
+Completed 201 Created in 94ms (Views: 0.5ms | ActiveRecord: 7.7ms | Allocations: 5798)
+
+
+Started GET "/events" for ::1 at 2022-10-24 23:02:55 +0100
+Processing by EventsController#index as */*
+  [1m[36mEvent Load (0.4ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/events_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.4ms | Allocations: 1054)
+
+
+Started PUT "/events/3?title=%20Curso%20de%20Creaci%C3%B3n&description=%20Curso%20de%20programaci%C3%B3n%20y%20dise%C3%B1o&date=%202023-04-04&starting_hour=%2009:00&finished_hour=%2021:00&photo=%20rgijreoigjig" for ::1 at 2022-10-24 23:43:56 +0100
+Processing by EventsController#update as */*
+  Parameters: {"events"=>{"title"=>"sos", "description"=>"hola uwu", "date"=>"2019-03-24", "starting_hour"=>"19:00", "finished_hour"=>"20:00", "photo"=>"gerikgnrtoignrt"}, "title"=>" Curso de Creación", "description"=>" Curso de programación y diseño", "date"=>" 2023-04-04", "starting_hour"=>" 09:00", "finished_hour"=>" 21:00", "photo"=>" rgijreoigjig", "id"=>"3", "event"=>{}}
+  [1m[36mEvent Load (0.7ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/events_controller.rb:44:in `set_event'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/events_controller.rb:29:in `update'
+  [1m[36mEvent Update (0.9ms)[0m  [1m[33mUPDATE "events" SET "description" = $1, "starting_hour" = $2, "updated_at" = $3 WHERE "events"."id" = $4[0m  [["description", "hola uwu"], ["starting_hour", "19:00"], ["updated_at", "2022-10-24 22:43:57.162753"], ["id", 3]]
+  ↳ app/controllers/events_controller.rb:29:in `update'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/events_controller.rb:29:in `update'
+Completed 200 OK in 176ms (Views: 0.9ms | ActiveRecord: 12.5ms | Allocations: 9544)
+
+
+Started GET "/events" for ::1 at 2022-10-24 23:44:02 +0100
+Processing by EventsController#index as */*
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/events_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 3.7ms | ActiveRecord: 0.3ms | Allocations: 992)
+
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1979676041808099075)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20221024224843)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (11.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221024224843"]]
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddNameToUsers (20221024225554)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "users" ADD "NIF" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "name" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_name" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "date_birth" date[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "phone" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "profile_photo" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "address" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221024225554"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1979676041808099075)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
